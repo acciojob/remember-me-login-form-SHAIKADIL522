@@ -1,5 +1,3 @@
-//your JS code here. If required.
-// Wait until DOM loads
 document.addEventListener("DOMContentLoaded", function () {
 
   const form = document.getElementById("loginForm");
@@ -8,15 +6,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkbox = document.getElementById("checkbox");
   const existingBtn = document.getElementById("existing");
 
-  // Check if credentials already exist in localStorage
+  // Hide existing button initially
+  existingBtn.style.display = "none";
+
+  // Check localStorage on load
   const savedUsername = localStorage.getItem("username");
   const savedPassword = localStorage.getItem("password");
 
   if (savedUsername && savedPassword) {
-    existingBtn.style.display = "inline";
+    existingBtn.style.display = "block";
   }
 
-  // Form submission
+  // Handle form submit
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (checkbox.checked) {
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
-      existingBtn.style.display = "inline";
+      existingBtn.style.display = "block";
     } else {
       localStorage.removeItem("username");
       localStorage.removeItem("password");
@@ -38,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Existing user login
   existingBtn.addEventListener("click", function () {
-    const savedUser = localStorage.getItem("username");
-    if (savedUser) {
-      alert("Logged in as " + savedUser);
+    const storedUser = localStorage.getItem("username");
+    if (storedUser) {
+      alert("Logged in as " + storedUser);
     }
   });
 
